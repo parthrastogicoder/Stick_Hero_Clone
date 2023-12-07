@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.canvas.Canvas?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+
+<AnchorPane prefHeight="603.0" prefWidth="970.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.stickmanfx.PlayPanel">
+   <children>
+
+      <ImageView fitHeight="603.0" fitWidth="970.0">
+         <image>
+            <Image url="@../../../images/background2.png" />
+         </image>
+      </ImageView>
+
+<!--      <Text fx:id="scoreText" layoutX="20" layoutY="20" fill="WHITE" font="$Font.font('Arial', 20)" />-->
+      <Canvas fx:id="gameCanvas" height="603.0" width="970" />
+      <ImageView fitHeight="39.0" fitWidth="38.0" layoutX="900.0" layoutY="37.0">
+         <image>
+            <Image url="@../../../images/mushroom.png" />
+         </image>
+      </ImageView>
+      <Text fx:id="Score" fill="#ebfc03" layoutX="426.0" layoutY="82.0" stroke="#f8f808" strokeType="OUTSIDE" strokeWidth="0.0" text="Text" textAlignment="CENTER" wrappingWidth="100.466796875">
+         <font>
+            <Font name="Franklin Gothic Demi" size="49.0" />
+         </font>
+      </Text>
+      <Text fx:id="MushScore" fill="#e4eb10" layoutX="836.0" layoutY="67.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Text" textAlignment="CENTER">
+         <font>
+            <Font name="Franklin Gothic Heavy" size="32.0" />
+         </font>
+      </Text>
+      <ImageView layoutX="41.0" layoutY="41.0">
+         <image>
+            <Image url="@../../../images/playsaveagame.png" />
+         </image>
+      </ImageView>
+      <Button layoutX="40.0" layoutY="43.0" mnemonicParsing="false" prefHeight="36.0" prefWidth="167.0" style="-fx-background-color: transparent;" fx:id="SaveButton" />
+      <!-- Add other UI elements here if needed -->
+   </children>
+</AnchorPane>
