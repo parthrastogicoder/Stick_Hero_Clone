@@ -1,7 +1,10 @@
 package com.example.stickmanfx;
 
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.image.Image;
@@ -9,6 +12,7 @@ import javafx.scene.input.MouseEvent;
 import javafx.animation.AnimationTimer;
 import javafx.scene.text.Text;
 
+import java.io.IOException;
 import java.net.URL;
 import java.util.Objects;
 import java.util.ResourceBundle;
@@ -58,7 +62,11 @@ public class PlayPanel implements Initializable {
                 gameController.updateGame();
 
                 // Additional logic for checking stick fall, moving player, etc.
-                checkAndHandleGameEvents();
+//                try {
+//                 //   checkAndHandleGameEvents();
+//                } catch (IOException e) {
+//                    throw new RuntimeException(e);
+//                }
 
                 // Render the game
                 renderGame();
@@ -67,14 +75,24 @@ public class PlayPanel implements Initializable {
         gameLoop.start();
     }
 
-    private void checkAndHandleGameEvents() {
+    private void checkAndHandleGameEvents() throws IOException {
         // Check if stick has fallen on the next platform
         if (gameController.checkStickFallenOnPlatform() && !gameController.getPlayer().isMoving()) {
+            System.out.println("hi");
             gameController.getPlayer().startMoving();
         }
 
         // Check if player has reached the end of the stick
         if (gameController.getPlayer().hasReachedEndOfStick()) {
+            if( !gameController.checkStickFallenOnPlatform() )
+            {
+                System.out.println("hi");
+
+                Parent root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("/com/example/stickmanfx/gameover.fxml")));
+                Scene scene = new Scene(root);
+                StickMan.prime.setScene(scene);
+                StickMan.prime.show();
+            }
             gameController.getPlayer().stopMoving();
 //            gameController.movePlatformsAndPlayerBackward();
             gameController.generateNewPlatform(gameCanvas.getWidth());
@@ -107,7 +125,9 @@ public class PlayPanel implements Initializable {
 
         // Render player
         Player player = gameController.getPlayer();
+        System.out.println(player.isMoving());
         if (player.isMoving()) {
+            System.out.println("k");
             animatePlayer(player);
         } else {
             gc.drawImage(playerImage, player.getXPos(), player.getYPos());

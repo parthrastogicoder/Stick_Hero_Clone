@@ -45,6 +45,11 @@ public class Player implements com.example.stickmanfx.Objects , Serializable {
         isMoving = true;
     }
 
+    public void fall()
+    {
+        this.setYPos(this.getYPos()-10);
+    }
+
     public void stopMoving() {
         isMoving = false;
     }
@@ -54,7 +59,7 @@ public class Player implements com.example.stickmanfx.Objects , Serializable {
     public void move() {
         // Logic to move the player
         if (this.isMoving()){
-        xPos += speed;}
+        xPos += 2;}
         // You might want to add boundary checks and other movement logic
     }
 
@@ -88,7 +93,7 @@ public class Player implements com.example.stickmanfx.Objects , Serializable {
     }
 
     public boolean hasReachedEndOfStick() {
-        return false;
+        return true;
     }
 
     public Image[] getWalkFrames() {

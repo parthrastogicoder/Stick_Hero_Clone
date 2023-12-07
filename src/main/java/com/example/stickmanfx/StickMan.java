@@ -8,6 +8,7 @@ import javafx.scene.Scene;
 import javafx.scene.media.*;
 import javafx.scene.paint.Color;
 import javafx.stage.Stage;
+import org.junit.Test;
 
 import java.io.File;
 import java.io.IOException;
@@ -17,6 +18,7 @@ public class StickMan extends Application {
     public static Stage prime = null;
 
     @Override
+
     public void start(Stage primaryStage) throws IOException {
         prime = primaryStage;
 

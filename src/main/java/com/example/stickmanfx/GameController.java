@@ -37,6 +37,14 @@ public class GameController {
  public int getScore() {
   return score;
  }
+ public void updateScore()
+ {
+  score +=1;
+ }
+ public void updateMush()
+ {
+  Mushroom.mushScore++;
+ }
 
  public void setScore(int score) {
   this.score = score;
@@ -47,6 +55,7 @@ public class GameController {
   stick.update();
   if (hasStickLanded() && !player.isMoving()) {
   player.startMoving();
+   System.out.println(player.isMoving());
   t=0;
   }
 
@@ -91,7 +100,13 @@ public class GameController {
  }
  // In GameController class
  public boolean checkStickFallenOnPlatform() {
- return false;
+
+double distance = platforms.get(1).getX() -platforms.get(0).getX() -platforms.get(1).getWidth()/2;
+  System.out.println(distance);
+  System.out.println(stick.getLength());
+if(stick.getLength()<distance)
+{return true;}
+ return true;
   // Implement logic to check if the stick has fallen on the next platform
  }
 
@@ -113,6 +128,8 @@ public class GameController {
  public double getInitialPlayerY() {
   return initialPlayerY;
  }
+
+
 // Existing method generateNewPlatform
 
 }
