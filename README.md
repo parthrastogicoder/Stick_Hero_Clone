@@ -30,7 +30,7 @@ Stick Hero Game is a JavaFX-based desktop game where players control a stick fig
 - **`Tester` and `TestRunner`**: JUnit tests for game components.
 - **Design Patterns**:
   - *Factory Pattern*: Implemented in `SoundFactory` and related classes for sound management.
-  - *Null Object Pattern*: Used in NullSound Class .
+  - *Null Object Pattern*: Used in `NullSound` Class .
 
 ## Contributors
 Parth Sandeep Rastogi - 2022352
