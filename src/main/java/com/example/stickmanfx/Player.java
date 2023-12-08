@@ -92,8 +92,13 @@ public class Player implements com.example.stickmanfx.Objects , Serializable {
         return isMoving;
     }
 
-    public boolean hasReachedEndOfStick() {
-        return true;
+    public boolean hasReachedEndOfStick(Stick s) {
+        System.out.println(xPos);
+        System.out.println(140+s.getLength());
+        if(xPos> 140+s.getLength())
+        {
+        return true;}
+        return false;
     }
 
     public Image[] getWalkFrames() {

@@ -6,8 +6,10 @@ import javafx.animation.KeyValue;
 import javafx.animation.Timeline;
 import javafx.util.Duration;
 
+import java.time.temporal.ValueRange;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Random;
 
 public class GameController {
  private Stick stick;
@@ -77,10 +79,10 @@ public class GameController {
   }
   System.out.println("stick fell? "+ checkStickFallenOnPlatform());
   System.out.println("stick landed? "+ hasStickLanded());
-  if (checkStickFallenOnPlatform() && !hasStickLanded()) {
+  if (checkStickFallenOnPlatform() && hasStickLanded()&& player.hasReachedEndOfStick(stick)) {
    //stickHasLanded = true;
-   removeFirstPlatform();
-   generateNewPlatformWithAnimation();
+   Platform p=removeFirstPlatform();
+   generateNewPlatformWithAnimation(p);
    resetStickForNextRound();
   }
   // Additional game logic goes here
@@ -116,24 +118,24 @@ public class GameController {
  // In GameController class
  public boolean checkStickFallenOnPlatform() {
 
-double distance = platforms.get(1).getX() -platforms.get(0).getX() -platforms.get(1).getWidth()/2;
+double distance = platforms.get(1).getX() -platforms.get(0).getX() +30;
   System.out.println(distance);
   System.out.println(stick.getLength());
   if(hasStickLanded()){
-if(stick.getLength()<distance)
+if(stick.getLength()<distance && stick.getLength()>distance-100 )
 {return true;}}
  return false;
   // Implement logic to check if the stick has fallen on the next platform
  }
 
- public void movePlatformsAndPlayerBackward() {
-  // Move all platforms and the player backward by a certain amount
-  double moveDistance = 100; // Example distance
-  for (Platform platform : platforms) {
-   platform.setX((int) (platform.getX() - moveDistance));
-  }
-  player.setXPos(player.getXPos() - moveDistance);
- }
+// public void movePlatformsAndPlayerBackward() {
+//  // Move all platforms and the player backward by a certain amount
+//  double moveDistance = 100; // Example distance
+//  for (Platform platform : platforms) {
+//   platform.setX((int) (platform.getX() - moveDistance));
+//  }
+//  player.setXPos(player.getXPos() - moveDistance);
+// }
 
  public void generateNewPlatform(double width) {
  }
@@ -145,51 +147,50 @@ if(stick.getLength()<distance)
   return initialPlayerY;
  }
 
- private void removeFirstPlatform() {
+ private Platform removeFirstPlatform() {
+
   if (!platforms.isEmpty()) {
-   platforms.remove(0);
+   return platforms.remove(0);
   }
+  return null;
  }
 
- private void generateNewPlatformWithAnimation() {
-  // Calculate new platform position and size
+ private void generateNewPlatformWithAnimation(Platform p) {
+  System.out.println("Generating");
   int newPlatformWidth = 100; // example width
   int newPlatformHeight = 160; // example height
-  int newPlatformX = (int) 500; // start off-screen
-  int newPlatformY = (int) (canvasHeight - newPlatformHeight); // adjust as needed
+  int newPlatformX = (int) 1000; // start off-screen
+  int newPlatformY = (int) (canvasHeight - newPlatformHeight);
 
   Platform newPlatform = new Platform(newPlatformWidth, newPlatformHeight, newPlatformX, newPlatformY);
   platforms.add(newPlatform);
-
-  // Animate the new platform moving into position
-  // You need to implement this method to animate the platform
+  platforms.get(0).setX(p.getX());
   animatePlatformEntry(newPlatform);
+  player.setXPos(initialPlayerX);
+  player.stopMoving();
  }
 
+
  private void resetStickForNextRound() {
-  stick = new Stick(); // Reset the stick
+  stick = new Stick();// Reset the stick
+  score++;
   // Reset any other necessary states for the next round
  }
 
  private void animatePlatformEntry(Platform platform) {
-  // Define the final position of the platform
-  double finalXPosition = 500; // example final position
+  double finalXPosition = 700; // example final position
 
-  // Create a KeyValue for the final position
   KeyValue kv = new KeyValue(platform.xPositionProperty(), finalXPosition, Interpolator.EASE_BOTH);
+  KeyFrame kf = new KeyFrame(Duration.seconds(1), kv);
 
-  // Create a KeyFrame for the end of the animation
-  KeyFrame kf = new KeyFrame(Duration.seconds(2), kv); // 2 seconds for example
-
-  // Create the Timeline with the KeyFrame
   Timeline timeline = new Timeline(kf);
   timeline.setOnFinished(event -> {
-   // Actions to perform after the animation ends, if any
+   platform.setX((int) finalXPosition); // Update the actual position
   });
 
-  // Start the animation
   timeline.play();
  }
+
 // Existing method generateNewPlatform
 
 }

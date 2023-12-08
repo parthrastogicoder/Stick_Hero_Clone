@@ -83,20 +83,20 @@ public class PlayPanel implements Initializable {
         }
 
         // Check if player has reached the end of the stick
-        if (gameController.getPlayer().hasReachedEndOfStick()) {
-            if( !gameController.checkStickFallenOnPlatform() )
-            {
-                System.out.println("hi");
-
-                Parent root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("/com/example/stickmanfx/gameover.fxml")));
-                Scene scene = new Scene(root);
-                StickMan.prime.setScene(scene);
-                StickMan.prime.show();
-            }
-            gameController.getPlayer().stopMoving();
-//            gameController.movePlatformsAndPlayerBackward();
-            gameController.generateNewPlatform(gameCanvas.getWidth());
-        }
+//        if (gameController.getPlayer().hasReachedEndOfStick(s)) {
+//            if( !gameController.checkStickFallenOnPlatform() )
+//            {
+//                System.out.println("hi");
+//
+//                Parent root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("/com/example/stickmanfx/gameover.fxml")));
+//                Scene scene = new Scene(root);
+//                StickMan.prime.setScene(scene);
+//                StickMan.prime.show();
+//            }
+//            gameController.getPlayer().stopMoving();
+////            gameController.movePlatformsAndPlayerBackward();
+//            gameController.generateNewPlatform(gameCanvas.getWidth());
+//        }
     }
 
 
@@ -113,7 +113,8 @@ public class PlayPanel implements Initializable {
 
         // Render stick
         Stick stick = gameController.getStick();
-        double stickBaseX = gameController.getInitialPlayerX() + 70; // Adjust as needed
+        double stickBaseX = gameController.getInitialPlayerX() + 70;
+        // Adjust as needed
         double stickBaseY = gameController.getInitialPlayerY() + 60; // Adjust as needed
          // Draw stick only when the player is not moving
             gc.save(); // Save the current state
