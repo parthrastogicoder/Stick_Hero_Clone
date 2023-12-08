@@ -99,6 +99,11 @@ public class GameController {
    generateNewPlatformWithAnimation(p);
    resetStickForNextRound();
   }
+
+  if(player.isInverted())
+  {
+   player.setYPos(player.getYPos()-20);
+  }
   // Additional game logic goes here
  }
  private boolean hasStickLanded() {
@@ -211,6 +216,17 @@ public void gameEnd() throws IOException {
  StickMan.prime.setScene(scene);
  StickMan.prime.show();
 }
+
+ public void invert() {
+  if(player.isInverted())
+  {
+   player.setInverted(false);
+  }
+  else
+  {
+   player.setInverted(true);
+  }
+ }
 // Existing method generateNewPlatform
 
 }

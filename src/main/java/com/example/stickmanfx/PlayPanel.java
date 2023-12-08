@@ -3,11 +3,15 @@ package com.example.stickmanfx;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Camera;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
+import javafx.scene.input.KeyCode;
+import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
 import javafx.animation.AnimationTimer;
 import javafx.scene.text.Text;
@@ -24,6 +28,7 @@ public class PlayPanel implements Initializable {
     private GraphicsContext gc;
     private GameController gameController;
     private Image playerImage;
+    private ImageView  playerI;
     private Image[] walkingImages; // Array of walking images
     private int currentWalkingFrame = 0;
     private long lastFrameTime = 0;
@@ -32,6 +37,7 @@ public class PlayPanel implements Initializable {
     public void initialize(URL url, ResourceBundle resourceBundle) {
         gc = gameCanvas.getGraphicsContext2D();
         playerImage = new Image(Objects.requireNonNull(getClass().getResourceAsStream("/images/stand.png"))); // Load player image
+        playerI = new ImageView(playerImage);
         gameController = new GameController(gameCanvas.getHeight());
 
         setupMouseEvents();
@@ -42,6 +48,15 @@ public class PlayPanel implements Initializable {
 
         gameCanvas.addEventHandler(MouseEvent.MOUSE_PRESSED, e -> gameController.startGrowingStick());
         gameCanvas.addEventHandler(MouseEvent.MOUSE_RELEASED, e -> gameController.stopGrowingStick());
+        StickMan.prime.getScene().setOnKeyPressed(event -> {
+
+            if (event.getCode() == KeyCode.SPACE) {
+                System.out.println("space clicked");
+                // Handle spacebar pressed
+                gameController.invert();
+
+            }
+        });
     }
 
 //    private void startGameLoop() {
@@ -136,9 +151,20 @@ public class PlayPanel implements Initializable {
             System.out.println("k");
             animatePlayer(player);
         } else {
-            gc.drawImage(playerImage, player.getXPos(), player.getYPos());
+            System.out.println("Player Rotated");
+          gc.save();
+
+          gc.drawImage(playerI.getImage(), player.getXPos(), player.getYPos());
+//            if(player.isInverted())
+//            { gc.scale(-1, 1);
+//            gc.drawImage(playerImage, -player.getXPos(), player.getYPos());}
+//            else
+//            {
+//                gc.drawImage(playerImage, player.getXPos(), player.getYPos());}
+            }
         }
-    }
+
+
 
 
     private void animatePlayer(Player player) {

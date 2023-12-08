@@ -14,6 +14,8 @@ public class StartPanel {
     private void handleStart(ActionEvent event) throws IOException {
         Parent root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("/com/example/stickmanfx/playscreen.fxml")));
         Scene scene = new Scene(root);
+        Thread s = new Thread(new Sound("Background"));
+        s.start();
         StickMan.prime.setScene(scene);
         StickMan.prime.show();
     }

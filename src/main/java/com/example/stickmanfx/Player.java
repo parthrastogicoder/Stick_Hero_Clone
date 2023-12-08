@@ -14,6 +14,7 @@ public class Player implements com.example.stickmanfx.Objects , Serializable {
     private Image[] walkFrames;
     private int currentFrame;
     private boolean isMoving;
+    private boolean isInverted;
 
     public Player(double xPos, double yPos, double speed) {
         this.xPos=xPos;
@@ -28,6 +29,7 @@ public class Player implements com.example.stickmanfx.Objects , Serializable {
         };
         currentFrame = 0;
         isMoving = false;
+        isInverted= false;
     }
 
     public void update() {
@@ -107,6 +109,15 @@ public class Player implements com.example.stickmanfx.Objects , Serializable {
 
     public void setWalkFrames(Image[] walkFrames) {
         this.walkFrames = walkFrames;
+    }
+
+    public boolean isInverted() {
+        return isInverted;
+    }
+
+    public void setInverted(boolean inverted) {
+        System.out.println("hello");
+        isInverted = inverted;
     }
 }
 
