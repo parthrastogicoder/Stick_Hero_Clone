@@ -1,5 +1,8 @@
 package com.example.stickmanfx;
 
+import javafx.beans.property.IntegerProperty;
+import javafx.beans.property.SimpleIntegerProperty;
+
 import java.io.Serializable;
 
 public class Platform implements Serializable , Objects {
@@ -7,14 +10,17 @@ public class Platform implements Serializable , Objects {
     private int height;
     private int xPosition;
     private int yPosition;
-
+    private IntegerProperty xPosition1;
     public Platform(int width, int height, int xPosition, int yPosition) {
         this.width = width;
         this.height = height;
         this.xPosition = xPosition;
         this.yPosition = yPosition;
+        this.xPosition1 = new SimpleIntegerProperty(xPosition);
     }
-
+    public IntegerProperty xPositionProperty() {
+        return xPosition1;
+    }
     public int getWidth() {
         return width;
     }

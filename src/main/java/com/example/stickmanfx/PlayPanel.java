@@ -18,7 +18,7 @@ import java.util.Objects;
 import java.util.ResourceBundle;
 
 public class PlayPanel implements Initializable {
-    @FXML private Canvas gameCanvas;
+    @FXML public  Canvas gameCanvas;
     @FXML private Text Score;
     @FXML private Text MushScore;
     private GraphicsContext gc;
