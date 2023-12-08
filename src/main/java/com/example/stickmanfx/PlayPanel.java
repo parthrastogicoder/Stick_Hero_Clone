@@ -27,6 +27,7 @@ public class PlayPanel implements Initializable {
     private Image[] walkingImages; // Array of walking images
     private int currentWalkingFrame = 0;
     private long lastFrameTime = 0;
+    public static AnimationTimer a;
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         gc = gameCanvas.getGraphicsContext2D();
@@ -55,11 +56,15 @@ public class PlayPanel implements Initializable {
 //    }
     // In PlayPanel's game loop
     private void startGameLoop() {
-        AnimationTimer gameLoop = new AnimationTimer() {
+        a = new AnimationTimer() {
             @Override
             public void handle(long now) {
                 // Game logic here
-                gameController.updateGame();
+                try {
+                    gameController.updateGame();
+                } catch (IOException e) {
+                    throw new RuntimeException(e);
+                }
 
                 // Additional logic for checking stick fall, moving player, etc.
 //                try {
@@ -72,7 +77,7 @@ public class PlayPanel implements Initializable {
                 renderGame();
             }
         };
-        gameLoop.start();
+        a.start();
     }
 
     private void checkAndHandleGameEvents() throws IOException {

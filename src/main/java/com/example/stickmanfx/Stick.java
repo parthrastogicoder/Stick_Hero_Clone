@@ -5,16 +5,18 @@ public class Stick {
     private double rotationAngle;
     private boolean isGrowing;
     private boolean isFalling;
+private boolean generated;
 
     public Stick() {
         this.length = 0;
         this.rotationAngle = 90; // Start vertically
         this.isGrowing = false;
         this.isFalling = false;
+        this.generated = false;
     }
 
     public void grow() {
-        if (isGrowing) {
+        if (isGrowing&&!generated) {
             length += 1; // Adjust the growth rate as needed
         }
     }
@@ -50,6 +52,7 @@ public class Stick {
 
     public void startFalling() {
         isFalling = true;
+        generated = true;
     }
 
     public void setLength(double length) {
@@ -70,5 +73,13 @@ public class Stick {
 
     public void setFalling(boolean falling) {
         isFalling = falling;
+    }
+
+    public boolean isGenerated() {
+        return generated;
+    }
+
+    public void setGenerated(boolean generated) {
+        this.generated = generated;
     }
 }

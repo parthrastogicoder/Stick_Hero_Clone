@@ -39,7 +39,12 @@
             <Image url="@../../../images/playsaveagame.png" />
          </image>
       </ImageView>
-      <Button layoutX="40.0" layoutY="43.0" mnemonicParsing="false" prefHeight="36.0" prefWidth="167.0" style="-fx-background-color: transparent;" fx:id="SaveButton" />
+      <Button fx:id="SaveButton" layoutX="40.0" layoutY="43.0" mnemonicParsing="false" prefHeight="36.0" prefWidth="167.0" style="-fx-background-color: transparent;" />
+      <ImageView fx:id="Mushroom" layoutX="434.0" layoutY="451.0">
+         <image>
+            <Image url="@../../../images/mushroom.png" />
+         </image>
+      </ImageView>
       <!-- Add other UI elements here if needed -->
    </children>
 </AnchorPane>

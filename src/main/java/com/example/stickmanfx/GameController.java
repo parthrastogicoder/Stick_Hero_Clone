@@ -4,11 +4,16 @@ import javafx.animation.Interpolator;
 import javafx.animation.KeyFrame;
 import javafx.animation.KeyValue;
 import javafx.animation.Timeline;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.util.Duration;
 
+import java.io.IOException;
 import java.time.temporal.ValueRange;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 import java.util.Random;
 
 public class GameController {
@@ -21,7 +26,7 @@ public class GameController {
  private double canvasWidth;
  private double initialPlayerX;
  private double initialPlayerY;
- private int score ;
+ public static int score ;
  public GameController(double canvasHeight) {
   this.canvasHeight = canvasHeight;
   this.platforms = new ArrayList<>();
@@ -60,7 +65,7 @@ public class GameController {
  }
 
  int t=0;
- public void updateGame() {
+ public void updateGame() throws IOException {
   stick.update();
   if (hasStickLanded() && !player.isMoving()) {
   player.startMoving();
@@ -75,6 +80,15 @@ public class GameController {
    if (player.getXPos()-this.getInitialPlayerX()-50 <= stick.getLength()) {
     player.move();
     // Logic for handling what happens when the player reaches the end
+   }
+  }
+  if(hasStickLanded()&&player.hasReachedEndOfStick(stick) )
+  {
+   player.fall();
+   if(player.getYPos()>initialPlayerY+230)
+   {
+    gameEnd();
+
    }
   }
   System.out.println("stick fell? "+ checkStickFallenOnPlatform());
@@ -190,7 +204,13 @@ if(stick.getLength()<distance && stick.getLength()>distance-100 )
 
   timeline.play();
  }
-
+public void gameEnd() throws IOException {
+  PlayPanel.a.stop();
+ Parent root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("/com/example/stickmanfx/gameover.fxml")));
+ Scene scene = new Scene(root);
+ StickMan.prime.setScene(scene);
+ StickMan.prime.show();
+}
 // Existing method generateNewPlatform
 
 }

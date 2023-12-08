@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.control.Button?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
@@ -17,7 +18,7 @@
             </ImageView>
             <AnchorPane layoutX="3.0" prefHeight="603.0" prefWidth="976.0">
                <children>
-                  <ImageView fitHeight="172.0" fitWidth="290.0" layoutX="343.0" layoutY="53.0">
+                  <ImageView fitHeight="172.0" fitWidth="290.0" layoutX="327.0" layoutY="53.0">
                      <image>
                         <Image url="@../../../images/gameover.png" />
                      </image>
@@ -27,26 +28,28 @@
                         <Image url="@../../../images/walk3.png" />
                      </image>
                   </ImageView>
-                  <ImageView fitHeight="65.0" fitWidth="72.0" layoutX="500.0" layoutY="426.0">
+                  <ImageView fitHeight="65.0" fitWidth="72.0" layoutX="478.0" layoutY="426.0">
                      <image>
                         <Image url="@../../../images/redo_btn.png" />
                      </image>
                   </ImageView>
-                  <ImageView fitHeight="65.0" fitWidth="62.0" layoutX="380.0" layoutY="426.0">
+                  <ImageView fitHeight="65.0" fitWidth="62.0" layoutX="403.0" layoutY="426.0">
                      <image>
                         <Image url="@../../../images/home_btn.png" />
                      </image>
                   </ImageView>
-                  <Text fill="#fcfafa" layoutX="536.0" layoutY="348.0" stroke="#f5ea0a" strokeType="OUTSIDE" strokeWidth="1.5" text="10" wrappingWidth="78.0">
+                  <Text fx:id="Score" fill="#fcfafa" layoutX="537.0" layoutY="348.0" stroke="#f5ea0a" strokeType="OUTSIDE" strokeWidth="1.5" text="10" wrappingWidth="78.0">
                      <font>
                         <Font name="Franklin Gothic Heavy" size="45.0" />
                      </font>
                   </Text>
-                  <Text fill="#fcfafa" layoutX="342.0" layoutY="349.0" stroke="#f5ea0a" strokeType="OUTSIDE" strokeWidth="1.5" text="SCORE :" wrappingWidth="172.0">
+                  <Text fill="#fcfafa" layoutX="362.0" layoutY="349.0" stroke="#f5ea0a" strokeType="OUTSIDE" strokeWidth="1.5" text="SCORE :" wrappingWidth="172.0">
                      <font>
                         <Font name="Franklin Gothic Heavy" size="45.0" />
                      </font>
                   </Text>
+                  <Button layoutX="402.0" layoutY="421.0" mnemonicParsing="false" onAction="#handleHome" prefHeight="71.0" prefWidth="62.0" style="-fx-background-color: transparent;" />
+                  <Button layoutX="478.0" layoutY="426.0" mnemonicParsing="false" onAction="#handleReplay" prefHeight="65.0" prefWidth="72.0" style="-fx-background-color: transparent;" />
                </children>
             </AnchorPane>
          </children>

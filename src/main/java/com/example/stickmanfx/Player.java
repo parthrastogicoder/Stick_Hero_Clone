@@ -47,7 +47,7 @@ public class Player implements com.example.stickmanfx.Objects , Serializable {
 
     public void fall()
     {
-        this.setYPos(this.getYPos()-10);
+        this.setYPos(this.getYPos()+3);
     }
 
     public void stopMoving() {
