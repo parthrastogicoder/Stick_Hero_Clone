@@ -93,10 +93,15 @@ public class Player implements com.example.stickmanfx.Objects , Serializable {
     public boolean isMoving() {
         return isMoving;
     }
+    public boolean checkColliding()
+    {
+        return false;
+    }
+
 
     public boolean hasReachedEndOfStick(Stick s) {
-        System.out.println(xPos);
-        System.out.println(140+s.getLength());
+//        System.out.println(xPos);
+//        System.out.println(140+s.getLength());
         if(xPos> 140+s.getLength())
         {
         return true;}
@@ -116,7 +121,7 @@ public class Player implements com.example.stickmanfx.Objects , Serializable {
     }
 
     public void setInverted(boolean inverted) {
-        System.out.println("hello");
+//        System.out.println("hello");
         isInverted = inverted;
     }
 }

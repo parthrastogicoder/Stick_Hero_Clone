@@ -19,6 +19,7 @@ import java.util.Random;
 public class GameController {
  private Stick stick;
  private Player player;
+ private Mushroom mushroom;
  private List<Platform> platforms;
  private boolean isStickGrowing;
  private boolean isStickFalling;
@@ -32,6 +33,7 @@ public class GameController {
   this.platforms = new ArrayList<>();
   this.stick = new Stick();
 
+
   // Adjust platform position and size
   double platformHeight = 160; // Example platform height
   double platformY = canvasHeight - platformHeight ; // Position higher
@@ -44,7 +46,7 @@ public class GameController {
   this.player = new Player(100, platformY - playerHeight, 4);
   this.initialPlayerX = player.getXPos();
   this.initialPlayerY = player.getYPos();
-
+  this.mushroom = new Mushroom(230,(int)initialPlayerY-20,50);
   this.score = 0;
  }
 
@@ -69,7 +71,7 @@ public class GameController {
   stick.update();
   if (hasStickLanded() && !player.isMoving()) {
   player.startMoving();
-   System.out.println(player.isMoving());
+   //System.out.println(player.isMoving());
   t=0;
   }
 
@@ -85,14 +87,16 @@ public class GameController {
   if(hasStickLanded()&&player.hasReachedEndOfStick(stick) )
   {
    player.fall();
+   Thread sound = new Thread(new Sound("Falling"));
+   sound.start();
    if(player.getYPos()>initialPlayerY+230)
    {
     gameEnd();
 
    }
   }
-  System.out.println("stick fell? "+ checkStickFallenOnPlatform());
-  System.out.println("stick landed? "+ hasStickLanded());
+ // System.out.println("stick fell? "+ checkStickFallenOnPlatform());
+  //System.out.println("stick landed? "+ hasStickLanded());
   if (checkStickFallenOnPlatform() && hasStickLanded()&& player.hasReachedEndOfStick(stick)) {
    //stickHasLanded = true;
    Platform p=removeFirstPlatform();
@@ -100,10 +104,10 @@ public class GameController {
    resetStickForNextRound();
   }
 
-  if(player.isInverted())
-  {
-   player.setYPos(player.getYPos()-20);
-  }
+//  if(player.isInverted())
+//  {
+//   player.setYPos(player.getYPos()-20);
+//  }
   // Additional game logic goes here
  }
  private boolean hasStickLanded() {
@@ -138,8 +142,8 @@ public class GameController {
  public boolean checkStickFallenOnPlatform() {
 
 double distance = platforms.get(1).getX() -platforms.get(0).getX() +30;
-  System.out.println(distance);
-  System.out.println(stick.getLength());
+ // System.out.println(distance);
+ // System.out.println(stick.getLength());
   if(hasStickLanded()){
 if(stick.getLength()<distance && stick.getLength()>distance-100 )
 {return true;}}
@@ -175,8 +179,12 @@ if(stick.getLength()<distance && stick.getLength()>distance-100 )
  }
 
  private void generateNewPlatformWithAnimation(Platform p) {
-  System.out.println("Generating");
-  int newPlatformWidth = 100; // example width
+  //System.out.println("Generating");
+  Random random = new Random();
+
+  // Generate a random number between 50 (inclusive) and 150 (exclusive)
+  int randomNumber = 70 + random.nextInt(110 - 50);
+  int newPlatformWidth = randomNumber; // example width
   int newPlatformHeight = 160; // example height
   int newPlatformX = (int) 1000; // start off-screen
   int newPlatformY = (int) (canvasHeight - newPlatformHeight);
@@ -197,10 +205,11 @@ if(stick.getLength()<distance && stick.getLength()>distance-100 )
  }
 
  private void animatePlatformEntry(Platform platform) {
+
   double finalXPosition = 700; // example final position
 
   KeyValue kv = new KeyValue(platform.xPositionProperty(), finalXPosition, Interpolator.EASE_BOTH);
-  KeyFrame kf = new KeyFrame(Duration.seconds(1), kv);
+  KeyFrame kf = new KeyFrame(Duration.seconds(0), kv);
 
   Timeline timeline = new Timeline(kf);
   timeline.setOnFinished(event -> {
@@ -218,14 +227,20 @@ public void gameEnd() throws IOException {
 }
 
  public void invert() {
-  if(player.isInverted())
-  {
-   player.setInverted(false);
-  }
-  else
-  {
+//  if(player.isInverted())
+//  {
+//   player.setInverted(false);
+//  }
+//  else
+//  {
+  if(player.isMoving()) {
+   if(!player.isInverted())
    player.setInverted(true);
+   else
+    player.setInverted(false);
   }
+
+//  }
  }
 // Existing method generateNewPlatform
 

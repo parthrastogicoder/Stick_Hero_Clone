@@ -12,7 +12,8 @@ public class SoundFactory {
             case "Mushroom":
                 return new MushroomSound();
             default:
-                throw new IllegalArgumentException("Unknown sound type: " + soundType);
+                return new NullSound();
+                //throw new IllegalArgumentException("Unknown sound type: " + soundType);
         }
     }
 }

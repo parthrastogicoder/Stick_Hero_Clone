@@ -8,6 +8,7 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
+import javafx.scene.control.Button;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyCode;
@@ -25,6 +26,8 @@ public class PlayPanel implements Initializable {
     @FXML public  Canvas gameCanvas;
     @FXML private Text Score;
     @FXML private Text MushScore;
+    @FXML private ImageView shroom;
+    //@FXML private Button invertButton;
     private GraphicsContext gc;
     private GameController gameController;
     private Image playerImage;
@@ -48,16 +51,20 @@ public class PlayPanel implements Initializable {
 
         gameCanvas.addEventHandler(MouseEvent.MOUSE_PRESSED, e -> gameController.startGrowingStick());
         gameCanvas.addEventHandler(MouseEvent.MOUSE_RELEASED, e -> gameController.stopGrowingStick());
-        StickMan.prime.getScene().setOnKeyPressed(event -> {
-
-            if (event.getCode() == KeyCode.SPACE) {
-                System.out.println("space clicked");
-                // Handle spacebar pressed
-                gameController.invert();
-
-            }
-        });
+//        gameCanvas.setOnKeyPressed(event -> {
+//
+//            if (event.getCode() == KeyCode.SPACE) {
+//                System.out.println("space clicked");
+//                // Handle spacebar pressed
+//                gameController.invert();
+//
+//            }
+//        });
+        gameCanvas.addEventHandler(MouseEvent.MOUSE_CLICKED, e -> gameController.invert());
     }
+// @FXML
+// private void invert()
+// {}
 
 //    private void startGameLoop() {
 //        AnimationTimer gameLoop = new AnimationTimer() {
@@ -98,7 +105,7 @@ public class PlayPanel implements Initializable {
     private void checkAndHandleGameEvents() throws IOException {
         // Check if stick has fallen on the next platform
         if (gameController.checkStickFallenOnPlatform() && !gameController.getPlayer().isMoving()) {
-            System.out.println("hi");
+            //System.out.println("hi");
             gameController.getPlayer().startMoving();
         }
 
@@ -148,11 +155,14 @@ public class PlayPanel implements Initializable {
         Player player = gameController.getPlayer();
         System.out.println(player.isMoving());
         if (player.isMoving()) {
-            System.out.println("k");
+           // System.out.println("k");
+            if(!player.isInverted())
             animatePlayer(player);
+            else
+                animatePlayerInverted(player);
         } else {
-            System.out.println("Player Rotated");
-          gc.save();
+         //   System.out.println("Player Rotated");
+
 
           gc.drawImage(playerI.getImage(), player.getXPos(), player.getYPos());
 //            if(player.isInverted())
@@ -182,6 +192,22 @@ public class PlayPanel implements Initializable {
         }
 
         gc.drawImage(walkingImages[currentWalkingFrame], player.getXPos(), player.getYPos());
+    }
+    private void animatePlayerInverted(Player player) {
+        // Ensure walkingImages is initialized and contains the walking frames
+        walkingImages = new Image[] {
+                new Image(Objects.requireNonNull(getClass().getResourceAsStream("/images/walk1invert.png"))),
+                new Image(Objects.requireNonNull(getClass().getResourceAsStream("/images/walk2invert.png"))),
+                new Image(Objects.requireNonNull(getClass().getResourceAsStream("/images/walk3invert.png")))
+        };
+
+        long currentTime = System.nanoTime();
+        if (currentTime - lastFrameTime > 200000000) { // Change frame every 200 milliseconds
+            currentWalkingFrame = (currentWalkingFrame + 1) % walkingImages.length;
+            lastFrameTime = currentTime;
+        }
+
+        gc.drawImage(walkingImages[currentWalkingFrame], player.getXPos(), player.getYPos()+60);
     }
 
 }
