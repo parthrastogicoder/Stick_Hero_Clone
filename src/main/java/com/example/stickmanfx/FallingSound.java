@@ -9,7 +9,7 @@ public class FallingSound implements Soundable{
         String ssound = "/images/Falling.mp3";
         Media sound = new Media(getClass().getResource(ssound).toString());
         MediaPlayer mediaPlayer = new MediaPlayer(sound);
-        mediaPlayer.setCycleCount(MediaPlayer.INDEFINITE);
+
         mediaPlayer.play();
     }
 }

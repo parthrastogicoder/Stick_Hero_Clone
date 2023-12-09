@@ -10,7 +10,7 @@ public class MushroomSound implements Soundable {
         String ssound = "/images/Collide.mp3";
         Media sound = new Media(getClass().getResource(ssound).toString());
         MediaPlayer mediaPlayer = new MediaPlayer(sound);
-        mediaPlayer.setCycleCount(MediaPlayer.INDEFINITE);
+
         mediaPlayer.play();
     }
 }

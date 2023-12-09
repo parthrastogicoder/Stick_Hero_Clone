@@ -41,16 +41,14 @@ public class GameoverPanel extends Canvas implements Initializable {
 // both constr. throws FileNotFoundException
             in = new FileInputStream("./src/main/java/com/example/stickmanfx/Mushroomscore");
             c = in.read();
-        } catch (IOException e) {
-            throw new RuntimeException(e);
         } finally {
             if (in != null)
                 in.close(); // IOException
 
         }
         System.out.println(c);
-        if( c>5)
-       {GameController.mushscore-=5;
+        GameController.mushscore-=5;
+           Mushroom.mushScore-=5;
            c-=5;
            FileOutputStream out = null;
 
@@ -58,9 +56,8 @@ public class GameoverPanel extends Canvas implements Initializable {
 // both constr. throws FileNotFoundException
                out = new FileOutputStream("./src/main/java/com/example/stickmanfx/Mushroomscore");
                out.write(c);
-           } catch (IOException e) {
-               throw new RuntimeException(e);
-           } finally {
+
+           }  finally {
                if (out != null)
                    out.close(); // IOException
 
@@ -73,7 +70,7 @@ public class GameoverPanel extends Canvas implements Initializable {
 
 
 
-    }
+
 @FXML
     public void handleHome(ActionEvent actionEvent) throws IOException {    Parent root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("/com/example/stickmanfx/homescreen.fxml")));
     String ssound = "/images/mario.mp3";
