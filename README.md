@@ -15,11 +15,10 @@ Stick Hero Game is a JavaFX-based desktop game where players control a stick fig
 - **OOP Concepts**: Implements encapsulation and inheritance for a structured and efficient codebase.
 
 ## How to Run
-1. **Install Java**: Ensure Java JDK is installed.
-2. **Install JavaFX**: Download JavaFX SDK from [OpenJFX](https://openjfx.io/).
-3. **Set Up Your IDE**: Include JavaFX libraries in your IDE.
-4. **Download the Game**: Clone or download the game repository.
-5. **Run the Application**: Execute the `StickMan` application class.
+1. mvn clean
+2. mvn compile
+3. mvn package
+4. mvn exec:java
 
 ## Project Structure
 - **`StickMan`**: Main application class for launching the game.
