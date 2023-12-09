@@ -1,14 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.canvas.Canvas?>
-<?import javafx.scene.control.Button?>
-<?import javafx.scene.image.Image?>
-<?import javafx.scene.image.ImageView?>
-<?import javafx.scene.layout.AnchorPane?>
-<?import javafx.scene.text.Font?>
-<?import javafx.scene.text.Text?>
+<?import javafx.scene.canvas.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.image.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
 
-<AnchorPane prefHeight="603.0" prefWidth="970.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.stickmanfx.PlayPanel">
+<AnchorPane prefHeight="603.0" prefWidth="970.0" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.stickmanfx.PlayPanel">
    <children>
 
       <ImageView fitHeight="603.0" fitWidth="970.0">
@@ -39,7 +37,7 @@
             <Image url="@../../../images/playsaveagame.png" />
          </image>
       </ImageView>
-      <Button fx:id="SaveButton" layoutX="40.0" layoutY="43.0" mnemonicParsing="false" prefHeight="36.0" prefWidth="167.0" style="-fx-background-color: transparent;" />
+      <Button fx:id="SaveButton" layoutX="40.0" layoutY="43.0" mnemonicParsing="false" onAction="#saveScore" prefHeight="36.0" prefWidth="167.0" style="-fx-background-color: transparent;" />
 <!--      <ImageView fx:id="shroom" layoutX="434.0" layoutY="451.0">-->
 <!--         <image>-->
 <!--            <Image url="@../../../images/mushroom.png" />-->

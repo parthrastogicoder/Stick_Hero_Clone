@@ -1,7 +1,7 @@
 package com.example.stickmanfx;
 
 
-public class SoundFactory {
+public class SoundFactory {// Here our Design pattern Object factory is being used
 
     public static Soundable createSound(String soundType) {
         switch (soundType) {

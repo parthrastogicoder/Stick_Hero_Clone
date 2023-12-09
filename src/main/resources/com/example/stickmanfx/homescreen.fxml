@@ -32,11 +32,14 @@
   OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 -->
 
-<?import javafx.scene.control.*?>
-<?import javafx.scene.image.*?>
-<?import javafx.scene.layout.*?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
 
-<AnchorPane prefHeight="603.0" prefWidth="970.0" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.stickmanfx.StartPanel">
+<AnchorPane prefHeight="603.0" prefWidth="970.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.stickmanfx.StartPanel">
             <children>
                <ImageView fitHeight="603.0" fitWidth="970.0">
                   <image>
@@ -56,12 +59,12 @@
                   <Image url="@../../../images/stand.png" />
                </image>
             </ImageView>
-            <ImageView fitHeight="63.0" fitWidth="129.0" layoutX="529.0" layoutY="416.0">
+            <Button layoutX="533.0" layoutY="416.0" mnemonicParsing="false" prefHeight="53.0" prefWidth="119.0" style="-fx-background-color: transparent; " />
+            <ImageView fitHeight="63.0" fitWidth="129.0" layoutX="529.0" layoutY="416.0" onMouseClicked="#handleStart">
                <image>
                   <Image url="@../../../images/play.png" />
                </image>
             </ImageView>
-            <Button layoutX="533.0" layoutY="416.0" mnemonicParsing="false" onAction="#handleStart" prefHeight="53.0" prefWidth="119.0" style="-fx-background-color: transparent; " />
             <Button layoutX="171.0" layoutY="435.0" mnemonicParsing="false" style="-fx-background-color: transparent;" />
             <ImageView fitHeight="63.0" fitWidth="235.0" layoutX="269.0" layoutY="416.0">
                <image>
@@ -69,13 +72,8 @@
                </image>
             </ImageView>
             <Button layoutX="84.0" layoutY="165.0" mnemonicParsing="false" style="-fx-background-color: transparent;" />
-            <ImageView fitHeight="63.0" fitWidth="58.0" layoutX="32.0" layoutY="93.0">
-               <image>
-                  <Image url="@../../../images/icons8-sound-96.png" />
-               </image>
-            </ImageView>
-            <Button fx:id="loadGame" layoutX="274.0" layoutY="416.0" mnemonicParsing="false" prefHeight="53.0" prefWidth="226.0" style="-fx-background-color: transparent;" />
-            <ImageView fx:id="helpButton" fitHeight="53.0" fitWidth="58.0" layoutX="32.0" layoutY="24.0" onMouseClicked="#handleHelp">
+            <Button layoutX="274.0" layoutY="416.0" mnemonicParsing="false" onAction="#handleStart" prefHeight="53.0" prefWidth="226.0" style="-fx-background-color: transparent;" />
+            <ImageView fitHeight="53.0" fitWidth="58.0" layoutX="30.0" layoutY="41.0" onMouseClicked="#handleHelp">
                <image>
                   <Image url="@../../../images/question.png" />
                </image>
@@ -105,7 +103,7 @@
                   <Image url="@../../../images/mushroom.png" />
                </image>
             </ImageView>
-            <ImageView fitHeight="34.0" fitWidth="31.0" layoutX="704.0" layoutY="483.0">
+            <ImageView fitHeight="53.0" fitWidth="58.0" layoutX="760.0" layoutY="35.0">
                <image>
                   <Image url="@../../../images/mushroom.png" />
                </image>
@@ -115,6 +113,21 @@
                   <Image url="@../../../images/mushroom.png" />
                </image>
             </ImageView>
+            <Text fill="#d7d313" layoutX="47.0" layoutY="283.0" strokeType="OUTSIDE" strokeWidth="0.0" text="HIGH SCORE -">
+               <font>
+                  <Font name="Franklin Gothic Heavy" size="36.0" />
+               </font>
+            </Text>
+            <Text fx:id="highScore" fill="#d7d313" layoutX="103.0" layoutY="334.0" strokeType="OUTSIDE" strokeWidth="0.0" text="TEXT">
+               <font>
+                  <Font name="Franklin Gothic Heavy" size="36.0" />
+               </font>
+            </Text>
+            <Text fx:id="MushScore" fill="#d7d313" layoutX="831.0" layoutY="80.0" strokeType="OUTSIDE" strokeWidth="0.0" text="TEXT">
+               <font>
+                  <Font name="Franklin Gothic Heavy" size="36.0" />
+               </font>
+            </Text>
          </children>
                </AnchorPane>
             </children></AnchorPane>

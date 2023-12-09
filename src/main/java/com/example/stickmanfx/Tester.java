@@ -3,6 +3,8 @@ package com.example.stickmanfx;
 import org.junit.*;
 
 
+import java.io.IOException;
+
 import static org.junit.Assert.*;
 
 
@@ -14,7 +16,7 @@ public class Tester {
     private Player player;
     private Stick stick;
     @Before
-    public void setUp() {
+    public void setUp() throws IOException, ClassNotFoundException {
         // Assuming your canvasHeight is a constant value, adjust as necessary
         gameController = new GameController(400);
 

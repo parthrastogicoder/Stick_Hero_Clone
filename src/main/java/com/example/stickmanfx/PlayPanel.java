@@ -15,9 +15,12 @@ import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
 import javafx.animation.AnimationTimer;
+import javafx.scene.media.Media;
+import javafx.scene.media.MediaPlayer;
+import javafx.scene.paint.Color;
 import javafx.scene.text.Text;
 
-import java.io.IOException;
+import java.io.*;
 import java.net.URL;
 import java.util.Objects;
 import java.util.Random;
@@ -42,13 +45,44 @@ public class PlayPanel implements Initializable {
         gc = gameCanvas.getGraphicsContext2D();
         playerImage = new Image(Objects.requireNonNull(getClass().getResourceAsStream("/images/stand.png"))); // Load player image
         playerI = new ImageView(playerImage);
-        gameController = new GameController(gameCanvas.getHeight());
-      //  Mushroom mush = new Mushroom((int) shroom.getX(), (int) shroom.getY(),0);
+        try {
+            gameController = new GameController(gameCanvas.getHeight());
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        } catch (ClassNotFoundException e) {
+            throw new RuntimeException(e);
+        }
+        //  Mushroom mush = new Mushroom((int) shroom.getX(), (int) shroom.getY(),0);
        // gameController.setMushroom(mush);
         setupMouseEvents();
         startGameLoop();
     }
+    @FXML
+    private void saveScore() throws IOException {
+        ScoreLoader s1 = new ScoreLoader(gameController.getScore());
+        ObjectOutputStream out = null;
+        try
+        {
+       out = new ObjectOutputStream(new FileOutputStream("./src/main/java/com/example/stickmanfx/Scoreload"));
+            out.writeObject(s1);
 
+            // Write as many objects as you like
+        } catch (FileNotFoundException e) {
+            
+        } catch (IOException e) {
+           
+        }
+       out.close();
+        Parent root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("/com/example/stickmanfx/homescreen.fxml")));
+
+        // Create a scene with the loaded FXML layout
+        Scene scene = new Scene(root, Color.BLACK);
+        StickMan.prime.setTitle("Stick Hero Game");
+
+        // Set the scene to the stage and show it
+        StickMan.prime.setScene(scene);
+        StickMan.prime.show();
+    }
     private void setupMouseEvents() {
 
         gameCanvas.addEventHandler(MouseEvent.MOUSE_PRESSED, e -> gameController.startGrowingStick());
@@ -98,7 +132,11 @@ public class PlayPanel implements Initializable {
 //                }
 
                 // Render the game
-                renderGame();
+                try {
+                    renderGame();
+                } catch (IOException e) {
+                    throw new RuntimeException(e);
+                }
             }
         };
         a.start();
@@ -130,7 +168,7 @@ public class PlayPanel implements Initializable {
 
 
     // In the renderGame method of PlayPanel class
-    private void renderGame() {
+    private void renderGame() throws IOException {
         System.out.println();
         gc.clearRect(0, 0, gameCanvas.getWidth(), gameCanvas.getHeight());
         Score.setText((""+gameController.getScore()));
@@ -180,6 +218,19 @@ public class PlayPanel implements Initializable {
 
 
           gc.drawImage(playerI.getImage(), player.getXPos(), player.getYPos());
+            FileOutputStream out = null;
+            int c;
+            try {
+// both constr. throws FileNotFoundException
+                out = new FileOutputStream("./src/main/java/com/example/stickmanfx/Mushroomscore");
+                 out.write(gameController.getMushscore());
+            } catch (IOException e) {
+                throw new RuntimeException(e);
+            } finally {
+                if (out != null)
+                    out.close(); // IOException
+
+            }
 
 //            if(player.isInverted())
 //            { gc.scale(-1, 1);

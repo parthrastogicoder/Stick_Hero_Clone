@@ -9,7 +9,7 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.util.Duration;
 
-import java.io.IOException;
+import java.io.*;
 import java.time.temporal.ValueRange;
 import java.util.ArrayList;
 import java.util.List;
@@ -48,7 +48,7 @@ public class GameController {
   GameController.isCollided = isCollided;
  }
 
- public GameController(double canvasHeight) {
+ public GameController(double canvasHeight) throws IOException, ClassNotFoundException {
   this.canvasHeight = canvasHeight;
   this.platforms = new ArrayList<>();
   this.stick = new Stick();
@@ -68,7 +68,34 @@ public class GameController {
   this.initialPlayerY = player.getYPos();
   this.mushroom = new Mushroom((int) (initialPlayerX+300),(int)initialPlayerY+72,50);
   this.score = 0;
-  this.setMushscore(0);
+  ObjectInputStream in1 = null;
+     try {
+         in1 = new ObjectInputStream(new FileInputStream("./src/main/java/com/example/stickmanfx/Scoreload"));
+         while (true) {
+
+             ScoreLoader s = (ScoreLoader) in1.readObject();
+             this.score = s.getScore();
+
+         }
+     } catch (Exception e)
+     {}
+  in1.close();
+  //this.score = 0;
+
+  FileInputStream in = null;
+  int c;
+  try {
+// both constr. throws FileNotFoundException
+   in = new FileInputStream("./src/main/java/com/example/stickmanfx/Mushroomscore");
+c = in.read();
+  } catch (IOException e) {
+      throw new RuntimeException(e);
+  } finally {
+   if (in != null)
+    in.close(); // IOException
+
+  }
+  this.setMushscore(c);
   isCollided=false;
  }
 
@@ -119,7 +146,7 @@ public class GameController {
 
    if (player.getXPos()-this.getInitialPlayerX()-50 <= stick.getLength()) {
     player.move();
-    // Logic for handling what happens when the player reaches the end
+
    }
   }
   if(hasStickLanded()&&player.hasReachedEndOfStick(stick) )
@@ -135,8 +162,7 @@ public class GameController {
   if(!isCollided)
   {
   check_collision();}
- // System.out.println("stick fell? "+ checkStickFallenOnPlatform());
-  //System.out.println("stick landed? "+ hasStickLanded());
+
   if (checkStickFallenOnPlatform() && hasStickLanded()&& player.hasReachedEndOfStick(stick)) {
    //stickHasLanded = true;
    Platform p=removeFirstPlatform();
@@ -144,11 +170,6 @@ public class GameController {
    resetStickForNextRound();
   }
 
-//  if(player.isInverted())
-//  {
-//   player.setYPos(player.getYPos()-20);
-//  }
-  // Additional game logic goes here
  }
  private boolean hasStickLanded() {
   // Implement stick landing logic
@@ -188,17 +209,10 @@ double distance = platforms.get(1).getX() -platforms.get(0).getX() +30;
 if(stick.getLength()<distance && stick.getLength()>distance-100 )
 {return true;}}
  return false;
-  // Implement logic to check if the stick has fallen on the next platform
+
  }
 
-// public void movePlatformsAndPlayerBackward() {
-//  // Move all platforms and the player backward by a certain amount
-//  double moveDistance = 100; // Example distance
-//  for (Platform platform : platforms) {
-//   platform.setX((int) (platform.getX() - moveDistance));
-//  }
-//  player.setXPos(player.getXPos() - moveDistance);
-// }
+
 
  public void generateNewPlatform(double width) {
  }
@@ -271,15 +285,25 @@ public void gameEnd() throws IOException {
  Scene scene = new Scene(root);
  StickMan.prime.setScene(scene);
  StickMan.prime.show();
+ ScoreLoader s1 = new ScoreLoader(0);
+ ObjectOutputStream out = null;
+ try
+ {
+  out = new ObjectOutputStream(new FileOutputStream("./src/main/java/com/example/stickmanfx/Scoreload"));
+  out.writeObject(s1);
+
+  // Write as many objects as you like
+ } catch (FileNotFoundException e) {
+
+ } catch (IOException e) {
+
+ }
+ out.close();
+
 }
 
  public void invert() {
-//  if(player.isInverted())
-//  {
-//   player.setInverted(false);
-//  }
-//  else
-//  {
+
   if(player.isMoving()) {
    if(!player.isInverted())
    player.setInverted(true);
@@ -287,7 +311,7 @@ public void gameEnd() throws IOException {
     player.setInverted(false);
   }
 
-//  }
+
  }
 
  public void  check_collision()
@@ -299,28 +323,9 @@ public void gameEnd() throws IOException {
     isCollided = true;
    }
   }
+  Thread s = new Thread(new Sound("Mushroom"));
+  s.start();
 
  }
-// public boolean check_collision()
-// {
-//  System.out.println("Playrer"+player.getXPos());
-//  System.out.println("mush"+mushroom.getxPosition());
-//
-//  if(player.isInverted())
-//  { //mushscore++;
-//   System.out.println(mushscore);
-//   System.out.println("player invertedddddddddddddddddddddddddddddddddddddd");
-//   if((player.getXPos()<mushroom.getxPosition()+500) && (player.getXPos()>mushroom.getxPosition()+370))
-//   {
-////    mushscore++;
-//    return true;
-//
-//   }
-//  }
-//  return false;
-//
-// }
-
-// Existing method generateNewPlatform
 
 }
