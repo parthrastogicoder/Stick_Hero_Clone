@@ -47,7 +47,7 @@ public class GameoverPanel extends Canvas implements Initializable {
 
         }
         System.out.println(c);
-        if (c>5){
+        if (c>4){
         GameController.mushscore-=5;
            Mushroom.mushScore-=5;
            c-=5;
