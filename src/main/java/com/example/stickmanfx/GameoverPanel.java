@@ -47,9 +47,10 @@ public class GameoverPanel extends Canvas implements Initializable {
 
         }
         System.out.println(c);
+        if (c>5){
         GameController.mushscore-=5;
            Mushroom.mushScore-=5;
-           c-=5;
+           c-=5;}
            FileOutputStream out = null;
 
            try {
