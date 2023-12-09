@@ -28,6 +28,26 @@ public class GameController {
  private double initialPlayerX;
  private double initialPlayerY;
  public static int score ;
+ public static int mushscore=0;
+
+ public static boolean isCollided;
+
+ public  int getMushscore() {
+  return mushscore;
+ }
+
+ public  void setMushscore(int mushscore) {
+  GameController.mushscore = mushscore;
+ }
+
+ public static boolean isIsCollided() {
+  return isCollided;
+ }
+
+ public static void setIsCollided(boolean isCollided) {
+  GameController.isCollided = isCollided;
+ }
+
  public GameController(double canvasHeight) {
   this.canvasHeight = canvasHeight;
   this.platforms = new ArrayList<>();
@@ -46,8 +66,26 @@ public class GameController {
   this.player = new Player(100, platformY - playerHeight, 4);
   this.initialPlayerX = player.getXPos();
   this.initialPlayerY = player.getYPos();
-  this.mushroom = new Mushroom(230,(int)initialPlayerY-20,50);
+  this.mushroom = new Mushroom((int) (initialPlayerX+300),(int)initialPlayerY+72,50);
   this.score = 0;
+  this.setMushscore(0);
+  isCollided=false;
+ }
+
+ public void setStick(Stick stick) {
+  this.stick = stick;
+ }
+
+ public void setPlayer(Player player) {
+  this.player = player;
+ }
+
+ public Mushroom getMushroom() {
+  return mushroom;
+ }
+
+ public void setMushroom(Mushroom mushroom) {
+  this.mushroom = mushroom;
  }
 
  public int getScore() {
@@ -74,7 +112,7 @@ public class GameController {
    //System.out.println(player.isMoving());
   t=0;
   }
-
+//  check_collision();
   if (player.isMoving() &&hasStickLanded()) {
 
    // Check if player has reached the end of the stick
@@ -87,14 +125,16 @@ public class GameController {
   if(hasStickLanded()&&player.hasReachedEndOfStick(stick) )
   {
    player.fall();
-   Thread sound = new Thread(new Sound("Falling"));
-   sound.start();
+
    if(player.getYPos()>initialPlayerY+230)
    {
     gameEnd();
 
    }
   }
+  if(!isCollided)
+  {
+  check_collision();}
  // System.out.println("stick fell? "+ checkStickFallenOnPlatform());
   //System.out.println("stick landed? "+ hasStickLanded());
   if (checkStickFallenOnPlatform() && hasStickLanded()&& player.hasReachedEndOfStick(stick)) {
@@ -201,6 +241,10 @@ if(stick.getLength()<distance && stick.getLength()>distance-100 )
  private void resetStickForNextRound() {
   stick = new Stick();// Reset the stick
   score++;
+  if(isCollided)
+  {mushscore++;}
+  isCollided= false;
+
   // Reset any other necessary states for the next round
  }
 
@@ -219,7 +263,10 @@ if(stick.getLength()<distance && stick.getLength()>distance-100 )
   timeline.play();
  }
 public void gameEnd() throws IOException {
+
   PlayPanel.a.stop();
+ Thread sound = new Thread(new Sound("Falling"));
+ sound.start();
  Parent root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("/com/example/stickmanfx/gameover.fxml")));
  Scene scene = new Scene(root);
  StickMan.prime.setScene(scene);
@@ -242,6 +289,38 @@ public void gameEnd() throws IOException {
 
 //  }
  }
+
+ public void  check_collision()
+ {
+  if( player.isInverted())
+  {
+   if(player.getXPos()>mushroom.getxPosition()-10 && player.getXPos() <mushroom.getxPosition())
+   {
+    isCollided = true;
+   }
+  }
+
+ }
+// public boolean check_collision()
+// {
+//  System.out.println("Playrer"+player.getXPos());
+//  System.out.println("mush"+mushroom.getxPosition());
+//
+//  if(player.isInverted())
+//  { //mushscore++;
+//   System.out.println(mushscore);
+//   System.out.println("player invertedddddddddddddddddddddddddddddddddddddd");
+//   if((player.getXPos()<mushroom.getxPosition()+500) && (player.getXPos()>mushroom.getxPosition()+370))
+//   {
+////    mushscore++;
+//    return true;
+//
+//   }
+//  }
+//  return false;
+//
+// }
+
 // Existing method generateNewPlatform
 
 }

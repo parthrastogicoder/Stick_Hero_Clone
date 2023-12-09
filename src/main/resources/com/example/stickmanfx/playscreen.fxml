@@ -40,11 +40,11 @@
          </image>
       </ImageView>
       <Button fx:id="SaveButton" layoutX="40.0" layoutY="43.0" mnemonicParsing="false" prefHeight="36.0" prefWidth="167.0" style="-fx-background-color: transparent;" />
-      <ImageView fx:id="shroom" layoutX="434.0" layoutY="451.0">
-         <image>
-            <Image url="@../../../images/mushroom.png" />
-         </image>
-      </ImageView>
+<!--      <ImageView fx:id="shroom" layoutX="434.0" layoutY="451.0">-->
+<!--         <image>-->
+<!--            <Image url="@../../../images/mushroom.png" />-->
+<!--         </image>-->
+<!--      </ImageView>-->
 <!--      <Button fx:id="invertButton" layoutX="-1.0" layoutY="5.0" mnemonicParsing="false"  prefHeight="595.0" prefWidth="970.0" style="-fx-background-color: transparent;" />-->
       <!-- Add other UI elements here if needed -->
    </children>

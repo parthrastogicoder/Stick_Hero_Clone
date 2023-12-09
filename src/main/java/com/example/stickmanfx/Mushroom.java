@@ -6,7 +6,7 @@ public class Mushroom implements Objects , Serializable {
     private int xPosition;
     private int yPosition;
     private int size;
-    public static int mushScore=0;
+    public static int mushScore;
 
     public Mushroom(int xPosition, int yPosition, int size) {
         this.xPosition = xPosition;

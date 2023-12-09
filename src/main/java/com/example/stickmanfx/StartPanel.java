@@ -19,4 +19,14 @@ public class StartPanel {
         StickMan.prime.setScene(scene);
         StickMan.prime.show();
     }
+    @FXML
+    private void handleHelp() throws IOException {
+        Parent root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("/com/example/stickmanfx/helpScreen.fxml")));
+        Scene scene = new Scene(root);
+        Thread s = new Thread(new Sound("Background"));
+        s.start();
+        StickMan.prime.setScene(scene);
+        StickMan.prime.show();
+    }
+
 }

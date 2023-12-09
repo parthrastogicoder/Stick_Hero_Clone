@@ -74,8 +74,8 @@
                   <Image url="@../../../images/icons8-sound-96.png" />
                </image>
             </ImageView>
-            <Button layoutX="274.0" layoutY="416.0" mnemonicParsing="false" prefHeight="53.0" prefWidth="226.0" style="-fx-background-color: transparent;" />
-            <ImageView fitHeight="53.0" fitWidth="58.0" layoutX="32.0" layoutY="24.0">
+            <Button fx:id="loadGame" layoutX="274.0" layoutY="416.0" mnemonicParsing="false" prefHeight="53.0" prefWidth="226.0" style="-fx-background-color: transparent;" />
+            <ImageView fx:id="helpButton" fitHeight="53.0" fitWidth="58.0" layoutX="32.0" layoutY="24.0" onMouseClicked="#handleHelp">
                <image>
                   <Image url="@../../../images/question.png" />
                </image>

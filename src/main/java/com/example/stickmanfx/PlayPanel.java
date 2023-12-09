@@ -20,13 +20,14 @@ import javafx.scene.text.Text;
 import java.io.IOException;
 import java.net.URL;
 import java.util.Objects;
+import java.util.Random;
 import java.util.ResourceBundle;
 
 public class PlayPanel implements Initializable {
     @FXML public  Canvas gameCanvas;
     @FXML private Text Score;
     @FXML private Text MushScore;
-    @FXML private ImageView shroom;
+  //  @FXML private ImageView shroom;
     //@FXML private Button invertButton;
     private GraphicsContext gc;
     private GameController gameController;
@@ -42,7 +43,8 @@ public class PlayPanel implements Initializable {
         playerImage = new Image(Objects.requireNonNull(getClass().getResourceAsStream("/images/stand.png"))); // Load player image
         playerI = new ImageView(playerImage);
         gameController = new GameController(gameCanvas.getHeight());
-
+      //  Mushroom mush = new Mushroom((int) shroom.getX(), (int) shroom.getY(),0);
+       // gameController.setMushroom(mush);
         setupMouseEvents();
         startGameLoop();
     }
@@ -129,16 +131,25 @@ public class PlayPanel implements Initializable {
 
     // In the renderGame method of PlayPanel class
     private void renderGame() {
-
+        System.out.println();
         gc.clearRect(0, 0, gameCanvas.getWidth(), gameCanvas.getHeight());
         Score.setText((""+gameController.getScore()));
-        MushScore.setText(String.valueOf(Mushroom.mushScore));
+
+//        MushScore.setText((""+gameController.getMushscore()));
+        MushScore.setText(""+gameController.getMushscore());
         // Render platforms
         for (Platform platform : gameController.getPlatforms()) {
             gc.fillRect(platform.getX(), platform.getY(), platform.getWidth(), platform.getHeight());
         }
+        Random random = new Random();
 
+        // Generate a random number between 50 (inclusive) and 150 (exclusive)
+      //  int randomNumber = 50 + random.nextInt(110 - 50);
+//        System.out.println("Mushroom initial pos"+gameController.getMushroom().getxPosition());
+//        shroom.setX(gameController.getMushroom().getxPosition());
+//        shroom.setY(gameController.getMushroom().getyPosition());
         // Render stick
+
         Stick stick = gameController.getStick();
         double stickBaseX = gameController.getInitialPlayerX() + 70;
         // Adjust as needed
@@ -151,9 +162,13 @@ public class PlayPanel implements Initializable {
             gc.restore(); // Restore the original state
 
 
+
         // Render player
         Player player = gameController.getPlayer();
-        System.out.println(player.isMoving());
+        if(!gameController.isCollided)
+        {
+        gc.drawImage(new Image(Objects.requireNonNull(getClass().getResourceAsStream("/images/mushroom.png"))),gameController.getMushroom().getxPosition(),gameController.getMushroom().getyPosition());}
+//        System.out.println(player.isMoving());
         if (player.isMoving()) {
            // System.out.println("k");
             if(!player.isInverted())
@@ -165,6 +180,7 @@ public class PlayPanel implements Initializable {
 
 
           gc.drawImage(playerI.getImage(), player.getXPos(), player.getYPos());
+
 //            if(player.isInverted())
 //            { gc.scale(-1, 1);
 //            gc.drawImage(playerImage, -player.getXPos(), player.getYPos());}
@@ -172,6 +188,7 @@ public class PlayPanel implements Initializable {
 //            {
 //                gc.drawImage(playerImage, player.getXPos(), player.getYPos());}
             }
+
         }
 
 
