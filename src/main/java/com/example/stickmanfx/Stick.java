@@ -24,7 +24,7 @@ private boolean generated;
     public void fall() {
         if (isFalling) {
             if (rotationAngle > 0) {
-                rotationAngle -= 0.55; // Adjust the falling speed as needed
+                rotationAngle -= 1; // Adjust the falling speed as needed
             }
         }
     }

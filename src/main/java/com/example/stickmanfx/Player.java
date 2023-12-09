@@ -61,7 +61,7 @@ public class Player implements com.example.stickmanfx.Objects , Serializable {
     public void move() {
         // Logic to move the player
         if (this.isMoving()){
-        xPos += 1;}
+        xPos += 2;}
         // You might want to add boundary checks and other movement logic
     }
 

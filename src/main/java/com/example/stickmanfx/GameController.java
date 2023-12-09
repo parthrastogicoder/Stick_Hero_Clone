@@ -276,11 +276,16 @@ if(stick.getLength()<distance && stick.getLength()>distance-100 )
 
   timeline.play();
  }
+ int soundflag=0;
 public void gameEnd() throws IOException {
 
   PlayPanel.a.stop();
+  if(soundflag==0)
+  {
  Thread sound = new Thread(new Sound("Falling"));
+
  sound.start();
+  soundflag++;}
  Parent root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("/com/example/stickmanfx/gameover.fxml")));
  Scene scene = new Scene(root);
  StickMan.prime.setScene(scene);
@@ -321,10 +326,11 @@ public void gameEnd() throws IOException {
    if(player.getXPos()>mushroom.getxPosition()-10 && player.getXPos() <mushroom.getxPosition())
    {
     isCollided = true;
+    Thread s = new Thread(new Sound("Mushroom"));
+    s.start();
    }
   }
-  Thread s = new Thread(new Sound("Mushroom"));
-  s.start();
+
 
  }
 

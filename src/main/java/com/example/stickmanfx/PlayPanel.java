@@ -30,8 +30,7 @@ public class PlayPanel implements Initializable {
     @FXML public  Canvas gameCanvas;
     @FXML private Text Score;
     @FXML private Text MushScore;
-  //  @FXML private ImageView shroom;
-    //@FXML private Button invertButton;
+
     private GraphicsContext gc;
     private GameController gameController;
     private Image playerImage;
@@ -87,31 +86,10 @@ public class PlayPanel implements Initializable {
 
         gameCanvas.addEventHandler(MouseEvent.MOUSE_PRESSED, e -> gameController.startGrowingStick());
         gameCanvas.addEventHandler(MouseEvent.MOUSE_RELEASED, e -> gameController.stopGrowingStick());
-//        gameCanvas.setOnKeyPressed(event -> {
-//
-//            if (event.getCode() == KeyCode.SPACE) {
-//                System.out.println("space clicked");
-//                // Handle spacebar pressed
-//                gameController.invert();
-//
-//            }
-//        });
+
         gameCanvas.addEventHandler(MouseEvent.MOUSE_CLICKED, e -> gameController.invert());
     }
-// @FXML
-// private void invert()
-// {}
 
-//    private void startGameLoop() {
-//        AnimationTimer gameLoop = new AnimationTimer() {
-//            @Override
-//            public void handle(long now) {
-//                gameController.updateGame();
-//                renderGame();
-//            }
-//        };
-//        gameLoop.start();
-//    }
     // In PlayPanel's game loop
     private void startGameLoop() {
         a = new AnimationTimer() {
@@ -124,14 +102,6 @@ public class PlayPanel implements Initializable {
                     throw new RuntimeException(e);
                 }
 
-                // Additional logic for checking stick fall, moving player, etc.
-//                try {
-//                 //   checkAndHandleGameEvents();
-//                } catch (IOException e) {
-//                    throw new RuntimeException(e);
-//                }
-
-                // Render the game
                 try {
                     renderGame();
                 } catch (IOException e) {
@@ -141,32 +111,6 @@ public class PlayPanel implements Initializable {
         };
         a.start();
     }
-
-    private void checkAndHandleGameEvents() throws IOException {
-        // Check if stick has fallen on the next platform
-        if (gameController.checkStickFallenOnPlatform() && !gameController.getPlayer().isMoving()) {
-            //System.out.println("hi");
-            gameController.getPlayer().startMoving();
-        }
-
-        // Check if player has reached the end of the stick
-//        if (gameController.getPlayer().hasReachedEndOfStick(s)) {
-//            if( !gameController.checkStickFallenOnPlatform() )
-//            {
-//                System.out.println("hi");
-//
-//                Parent root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("/com/example/stickmanfx/gameover.fxml")));
-//                Scene scene = new Scene(root);
-//                StickMan.prime.setScene(scene);
-//                StickMan.prime.show();
-//            }
-//            gameController.getPlayer().stopMoving();
-////            gameController.movePlatformsAndPlayerBackward();
-//            gameController.generateNewPlatform(gameCanvas.getWidth());
-//        }
-    }
-
-
     // In the renderGame method of PlayPanel class
     private void renderGame() throws IOException {
         System.out.println();
@@ -179,14 +123,6 @@ public class PlayPanel implements Initializable {
         for (Platform platform : gameController.getPlatforms()) {
             gc.fillRect(platform.getX(), platform.getY(), platform.getWidth(), platform.getHeight());
         }
-        Random random = new Random();
-
-        // Generate a random number between 50 (inclusive) and 150 (exclusive)
-      //  int randomNumber = 50 + random.nextInt(110 - 50);
-//        System.out.println("Mushroom initial pos"+gameController.getMushroom().getxPosition());
-//        shroom.setX(gameController.getMushroom().getxPosition());
-//        shroom.setY(gameController.getMushroom().getyPosition());
-        // Render stick
 
         Stick stick = gameController.getStick();
         double stickBaseX = gameController.getInitialPlayerX() + 70;
@@ -219,11 +155,11 @@ public class PlayPanel implements Initializable {
 
           gc.drawImage(playerI.getImage(), player.getXPos(), player.getYPos());
             FileOutputStream out = null;
-            int c;
+
             try {
 // both constr. throws FileNotFoundException
                 out = new FileOutputStream("./src/main/java/com/example/stickmanfx/Mushroomscore");
-                 out.write(gameController.getMushscore());
+                out.write(gameController.getMushscore());
             } catch (IOException e) {
                 throw new RuntimeException(e);
             } finally {
@@ -232,12 +168,6 @@ public class PlayPanel implements Initializable {
 
             }
 
-//            if(player.isInverted())
-//            { gc.scale(-1, 1);
-//            gc.drawImage(playerImage, -player.getXPos(), player.getYPos());}
-//            else
-//            {
-//                gc.drawImage(playerImage, player.getXPos(), player.getYPos());}
             }
 
         }

@@ -13,6 +13,8 @@ import javafx.scene.media.MediaPlayer;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Text;
 
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
 import java.io.IOException;
 import java.net.URL;
 import java.util.Objects;
@@ -33,10 +35,43 @@ public class GameoverPanel extends Canvas implements Initializable {
     }
     @FXML
     public void handleReplay(ActionEvent actionEvent) throws IOException {
+        FileInputStream in = null;
+        int c;
+        try {
+// both constr. throws FileNotFoundException
+            in = new FileInputStream("./src/main/java/com/example/stickmanfx/Mushroomscore");
+            c = in.read();
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        } finally {
+            if (in != null)
+                in.close(); // IOException
+
+        }
+        System.out.println(c);
+        if( c>5)
+       {GameController.mushscore-=5;
+           c-=5;
+           FileOutputStream out = null;
+
+           try {
+// both constr. throws FileNotFoundException
+               out = new FileOutputStream("./src/main/java/com/example/stickmanfx/Mushroomscore");
+               out.write(c);
+           } catch (IOException e) {
+               throw new RuntimeException(e);
+           } finally {
+               if (out != null)
+                   out.close(); // IOException
+
+           }
         Parent root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("/com/example/stickmanfx/playscreen.fxml")));
         Scene scene = new Scene(root);
         StickMan.prime.setScene(scene);
-        StickMan.prime.show();
+        StickMan.prime.show();}
+
+
+
 
     }
 @FXML
