@@ -1,6 +1,7 @@
 # Stick Hero Game - JavaFX
 
 ## Description
+https://github.com/parthrastogicoder/stickmanFX
 Stick Hero Game is a JavaFX-based desktop game where players control a stick figure character which is mario in our case. It incorporates Object-Oriented Programming (OOP) principles such as encapsulation and inheritance, making the code more modular, reusable, and maintainable. The game features dynamic platform generation, stick growth and falling mechanics, and different sound effects for in-game actions.
 
 ## Features
