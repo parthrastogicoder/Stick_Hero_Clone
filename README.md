@@ -10,15 +10,20 @@ Stick Hero Game is a JavaFX-based desktop game where players control a stick fig
 - **Player Control**: Allows the player to move and invert.
 - **GameOver Logic**: Handles player falls and game restarts.
 - **Score Tracking**: Keeps track of player performance throughout the game.
+- **Reviving**: Using 5  mushrooms player revives.
 - **Design Patterns**: Utilizes Factory and Null object design patterns for sound generation.
 - **JUnit Testing**: Includes unit tests to ensure the reliability and correctness of the game components.
 - **OOP Concepts**: Implements encapsulation and inheritance for a structured and efficient codebase.
+- **Multithreading**: Implements multithreading in sound .
+- **Serialization**: Used to save game and run game.
 
 ## How to Run
 1. mvn clean
 2. mvn compile
 3. mvn package
 4. mvn exec:java
+
+   For JUnit Testing : Go to TestRunner class and start.
 
 ## Project Structure
 - **`StickMan`**: Main application class for launching the game.
@@ -30,6 +35,10 @@ Stick Hero Game is a JavaFX-based desktop game where players control a stick fig
 - **Design Patterns**:
   - *Factory Pattern*: Implemented in `SoundFactory` and related classes for sound management.
   - *Null Object Pattern*: Used in `NullSound` Class .
+  - **Theards**:
+  - Implemented in 'Sound class'.
+  - **Exception Handling**:
+  - Implemented in 'InvalidGameStateException' and 'ResourceLoadException'.
 
 ## Contributors
 Parth Sandeep Rastogi - 2022352
