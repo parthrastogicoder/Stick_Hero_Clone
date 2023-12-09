@@ -50,7 +50,7 @@ public class GameoverPanel extends Canvas implements Initializable {
         if (c>5){
         GameController.mushscore-=5;
            Mushroom.mushScore-=5;
-           c-=5;}
+           c-=5;
            FileOutputStream out = null;
 
            try {
@@ -66,7 +66,7 @@ public class GameoverPanel extends Canvas implements Initializable {
         Parent root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("/com/example/stickmanfx/playscreen.fxml")));
         Scene scene = new Scene(root);
         StickMan.prime.setScene(scene);
-        StickMan.prime.show();}
+        StickMan.prime.show();}}
 
 
 
