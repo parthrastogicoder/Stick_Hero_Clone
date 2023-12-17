@@ -43,7 +43,7 @@ Stick Hero Game is a JavaFX-based desktop game where players control a stick fig
 
 ## Contributors
 Parth Sandeep Rastogi - 2022352
-Anisha Prashant Bopardikar - 2022078
+
 
 
 
