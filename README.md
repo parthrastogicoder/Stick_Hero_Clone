@@ -25,6 +25,10 @@ Stick Hero Game is a JavaFX-based desktop game where players control a stick fig
 4. mvn exec:java
 
    For JUnit Testing : Go to TestRunner class and start.
+## GUI
+![pic2](https://github.com/parthrastogicoder/Stick_Hero_Clone/assets/119072596/4966e38b-ab3b-411a-9c66-1eecf03e4f41)
+![pic1](https://github.com/parthrastogicoder/Stick_Hero_Clone/assets/119072596/50f9a13b-a93a-4d23-a81e-e27a09be7391)
+![pic3](https://github.com/parthrastogicoder/Stick_Hero_Clone/assets/119072596/410ea8b5-b344-43cf-bd0f-74404cd402bb)
 
 ## Project Structure
 - **`StickMan`**: Main application class for launching the game.
